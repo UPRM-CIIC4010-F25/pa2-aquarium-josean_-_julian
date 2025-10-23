@@ -24,7 +24,7 @@ Grading
 ## Team Info
 | Student Number | Student Name | Student Email |
 |-|-|-|
-|(STUDENT NUMBER HERE)| (STUDENT NAME HERE)| (STUDENT EMAIL HERE) |
+|(843-21-1729)| (Josean I. Guilbe Fernandez)| (josean.guilbe@upr.edu) |
 |(STUDENT NUMBER HERE)| (STUDENT NAME HERE)| (STUDENT EMAIL HERE) |
 
 ---
