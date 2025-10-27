@@ -12,6 +12,10 @@ enum class AquariumCreatureType {
     BiggerFish
 };
 
+enum class AquariumPowerUpType {
+    SpeedBoost,
+};
+
 string AquariumCreatureTypeToString(AquariumCreatureType t);
 
 class AquariumLevelPopulationNode{
@@ -58,7 +62,8 @@ public:
     float isYDirectionActive() {return m_dy != 0; }
     float getDx() { return m_dx; }
     float getDy() { return m_dy; }
-
+    int getSpeed() const { return m_speed; }
+    
     int getScore()const { return m_score; }
     int getLives() const { return m_lives; }
     int getPower() const { return m_power; }
@@ -93,15 +98,37 @@ public:
     void draw() const override;
 };
 
+class PowerUp : public Creature {
+public:
+    PowerUp(float x, float y, int speed, std::shared_ptr<GameSprite> sprite, AquariumPowerUpType type)
+        : Creature(x, y, speed, 20, 0, sprite), m_type(type) {}
 
+    void draw() const override {
+        if (m_sprite) {
+            ofSetColor(ofColor::yellow);
+            m_sprite->draw(m_x, m_y);
+            ofSetColor(ofColor::white);
+        }
+    }
+
+    void move() override {
+    }
+
+    AquariumPowerUpType GetType() const { return m_type; }
+
+private:
+    AquariumPowerUpType m_type;
+};
 class AquariumSpriteManager {
     public:
         AquariumSpriteManager();
         ~AquariumSpriteManager() = default;
         std::shared_ptr<GameSprite>GetSprite(AquariumCreatureType t);
+        std::shared_ptr<GameSprite> GetPowerUpSprite();
     private:
         std::shared_ptr<GameSprite> m_npc_fish;
         std::shared_ptr<GameSprite> m_big_fish;
+        std::shared_ptr<GameSprite> m_powerup_sprite;
 };
 
 

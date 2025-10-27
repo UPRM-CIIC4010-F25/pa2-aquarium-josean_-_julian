@@ -136,6 +136,7 @@ void BiggerFish::draw() const {
 AquariumSpriteManager::AquariumSpriteManager(){
     this->m_npc_fish = std::make_shared<GameSprite>("base-fish.png", 70,70);
     this->m_big_fish = std::make_shared<GameSprite>("bigger-fish.png", 120, 120);
+    this->m_powerup_sprite = std::make_shared<GameSprite>("speedup.webp", 60, 60);
 }
 
 std::shared_ptr<GameSprite> AquariumSpriteManager::GetSprite(AquariumCreatureType t){
@@ -150,6 +151,9 @@ std::shared_ptr<GameSprite> AquariumSpriteManager::GetSprite(AquariumCreatureTyp
     }
 }
 
+std::shared_ptr<GameSprite> AquariumSpriteManager::GetPowerUpSprite() {
+    return std::make_shared<GameSprite>(*this->m_powerup_sprite);
+}
 
 // Aquarium Implementation
 Aquarium::Aquarium(int width, int height, std::shared_ptr<AquariumSpriteManager> spriteManager)
@@ -174,6 +178,14 @@ void Aquarium::update() {
         creature->move();
     }
     this->Repopulate();
+    if (rand() % 300 == 0) { 
+        int x = rand() % this->getWidth();
+        int y = rand() % this->getHeight();
+        auto sprite = this->m_sprite_manager->GetPowerUpSprite();
+        auto powerup = std::make_shared<PowerUp>(x, y, 0, sprite, AquariumPowerUpType::SpeedBoost);
+        this->addCreature(powerup);
+        ofLogNotice() << "Spawned a PowerUp at (" << x << ", " << y << ")";
+    }
 }
 
 void Aquarium::draw() const {
@@ -285,6 +297,14 @@ void AquariumGameScene::Update(){
             ofLogVerbose() << "Collision detected between player and NPC!" << std::endl;
             if(event->creatureB != nullptr){
                 event->print();
+                std::shared_ptr<PowerUp> powerup = std::dynamic_pointer_cast<PowerUp>(event->creatureB);
+                if (powerup) {
+                ofLogNotice() << "Power-Up collected!";
+                int newSpeed = std::min(this->m_player->getSpeed() + 2, 5);
+                this->m_player->changeSpeed(newSpeed);
+                this->m_aquarium->removeCreature(event->creatureB);
+                return;
+                }
                 if(this->m_player->getPower() < event->creatureB->getValue()){
                     ofLogNotice() << "Player is too weak to eat the creature!" << std::endl;
                     this->m_player->loseLife(3*60); // 3 frames debounce, 3 seconds at 60fps
