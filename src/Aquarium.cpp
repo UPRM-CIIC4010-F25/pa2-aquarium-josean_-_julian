@@ -276,7 +276,7 @@ std::shared_ptr<GameEvent> DetectAquariumCollisions(std::shared_ptr<Aquarium> aq
 
 void AquariumGameScene::Update(){
     std::shared_ptr<GameEvent> event;
-
+    ofSoundUpdate();
     this->m_player->update();
 
     if (this->updateControl.tick()) {

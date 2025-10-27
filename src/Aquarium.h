@@ -5,7 +5,7 @@
 #include <iostream>
 #include <algorithm>
 #include "Core.h"
-
+#include "ofSoundPlayer.h"
 
 enum class AquariumCreatureType {
     NPCreature,
@@ -142,8 +142,13 @@ std::shared_ptr<GameEvent> DetectAquariumCollisions(std::shared_ptr<Aquarium> aq
 
 class AquariumGameScene : public GameScene {
     public:
-        AquariumGameScene(std::shared_ptr<PlayerCreature> player, std::shared_ptr<Aquarium> aquarium, string name)
-        : m_player(std::move(player)) , m_aquarium(std::move(aquarium)), m_name(name){}
+        AquariumGameScene(std::shared_ptr<PlayerCreature> player, std::shared_ptr<Aquarium> aquarium, string name):
+        m_player(std::move(player)) , m_aquarium(std::move(aquarium)), m_name(name){
+        bgSound.load("water.mp3");
+        bgSound.setLoop(true);  
+        bgSound.setVolume(0.4f);                     
+        bgSound.play();
+    }
         std::shared_ptr<GameEvent> GetLastEvent(){return m_lastEvent;}
         void SetLastEvent(std::shared_ptr<GameEvent> event){this->m_lastEvent = event;}
         std::shared_ptr<PlayerCreature> GetPlayer(){return this->m_player;}
@@ -158,6 +163,7 @@ class AquariumGameScene : public GameScene {
         std::shared_ptr<GameEvent> m_lastEvent;
         string m_name;
         AwaitFrames updateControl{5};
+        ofSoundPlayer bgSound;
 };
 
 
