@@ -25,7 +25,7 @@ Grading
 | Student Number | Student Name | Student Email |
 |-|-|-|
 |(843-21-1729)| (Josean I. Guilbe Fernandez)| (josean.guilbe@upr.edu) |
-|(820-24-5965)| (Julian A. Walker Varela)| (julian.walker@upr.edu) |
+|(802-24-5965)| (Julian A. Walker Varela)| (julian.walker@upr.edu) |
 
 ---
 
