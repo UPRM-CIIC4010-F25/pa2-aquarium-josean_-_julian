@@ -25,7 +25,7 @@ Grading
 | Student Number | Student Name | Student Email |
 |-|-|-|
 |(843-21-1729)| (Josean I. Guilbe Fernandez)| (josean.guilbe@upr.edu) |
-|(STUDENT NUMBER HERE)| (STUDENT NAME HERE)| (STUDENT EMAIL HERE) |
+|(820-24-5965)| (Julian A. Walker Varela)| (julian.walker@upr.edu) |
 
 ---
 
@@ -36,4 +36,5 @@ You MUST put you & your partner's information in this README file otherwise ther
 If a partner has no commits in the repositories, they will receive a 0.
 
 # Student Notes
-If you have any bonus specs, bonus or any details the TA's should know, you should include it here:
+If you have any bonus specs, bonus or any details the TA's should know, you should include it here: 
+I made my own sprites for the new fishes
